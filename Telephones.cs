@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace MagasinTelephone
 {
@@ -85,7 +86,21 @@ namespace MagasinTelephone
 
             foreach (string line in rtbTelephones.Lines)
             {
-                e.Graphics.DrawString(line, listeFont, Brushes.Black, xFloat, yFloat);
+                string marque, nom = "N/A";
+
+                marque = line.Split('\t')[0];
+                foreach(String s in line.Split('\t'))
+                {
+                    if (s.Trim() != "")
+                    {
+                        nom = s;
+                    }
+                }
+
+                e.Graphics.DrawString(marque, listeFont, Brushes.Black, xFloat, yFloat);
+                e.Graphics.DrawString(nom, listeFont, Brushes.Black, xFloat + 198, yFloat);
+
+                //e.Graphics.DrawString(line, listeFont, Brushes.Black, xFloat, yFloat);
                 yFloat += detailsFont.GetHeight(e.Graphics) + 5; 
             }
 
@@ -93,6 +108,10 @@ namespace MagasinTelephone
 
         private void btnImprimer_Click(object sender, EventArgs e)
         {
+            telephonePrintPreviewDialog.Load += (s, loadEventArgs) =>
+            {
+                ((Form)telephonePrintPreviewDialog).WindowState = FormWindowState.Maximized;
+            };
             telephonePrintPreviewDialog.ShowDialog();
         }
 
@@ -164,6 +183,9 @@ namespace MagasinTelephone
             // Determine whether the text was found in rtbTelephones.
             if (index >= 0)
             {
+                int occurrences = CountOccurrences(rtbTelephones, txtRecherche.Text);
+                //MessageBox.Show($"Le mot \"{txtRecherche.Text}\" a été trouvé {occurrences} fois."); // Si on veut afficher le nombre d'occurrences avec message box
+                lblRechercheCount.Text = $"Occurrences: {occurrences}"; // Si on veut afficher le nombre d'occurrences dans le label
                 // Select the found text.
                 rtbTelephones.Select(index, txtRecherche.Text.Length);
                 rtbTelephones.Focus();
@@ -174,10 +196,37 @@ namespace MagasinTelephone
             else
             {
                 // Display a message box indicating that the text was not found.
-                MessageBox.Show("Text was not found.");
+                lblRechercheCount.Text = "Occurrences: 0";
+                MessageBox.Show("Le texte n'a pas été trouvé.");
                 _lastSearchIndex = 0; // Reset the index.
             }
         }
+
+        // Count the amount of times the word is found in the RichTextBox
+        private int CountOccurrences(RichTextBox rtb, string searchString)
+        {
+            int count = 0;
+            int index = 0;
+
+            searchString = searchString.ToLower();
+            string rtbText = rtb.Text.ToLower();
+
+            Console.WriteLine("==============");
+            Console.WriteLine($"Last Index: {rtbText.LastIndexOf(searchString)}");
+            while (index >= 0 && index < rtbText.LastIndexOf(searchString))
+            {
+                Console.WriteLine($"Found at index: {index}");
+                Console.WriteLine($"Count: {count}");
+
+                rtb.Find(searchString, index, rtbText.Length, RichTextBoxFinds.None);
+                index = rtbText.IndexOf(searchString, index) + 1;
+                count++;
+            }
+            Console.WriteLine("==============");
+
+            return count;
+        }
+
         private void txtRecherche_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

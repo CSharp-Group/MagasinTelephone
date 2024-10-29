@@ -41,6 +41,7 @@ namespace MagasinTelephone
             this.telephonePrintPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
             this.telephonePrintDocument = new System.Drawing.Printing.PrintDocument();
             this.pbThumbnail = new System.Windows.Forms.PictureBox();
+            this.lblRechercheCount = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbThumbnail)).BeginInit();
@@ -60,7 +61,7 @@ namespace MagasinTelephone
             // cboPolice
             // 
             this.cboPolice.Name = "cboPolice";
-            this.cboPolice.Size = new System.Drawing.Size(280, 38);
+            this.cboPolice.Size = new System.Drawing.Size(280, 25);
             this.cboPolice.SelectedIndexChanged += new System.EventHandler(this.cboPolice_SelectedIndexChanged);
             // 
             // rtbTelephones
@@ -88,6 +89,7 @@ namespace MagasinTelephone
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblRechercheCount);
             this.groupBox1.Controls.Add(this.btnRecherche);
             this.groupBox1.Controls.Add(this.txtRecherche);
             this.groupBox1.Controls.Add(this.lblTypeDeRecherche);
@@ -95,7 +97,7 @@ namespace MagasinTelephone
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(517, 101);
+            this.groupBox1.Size = new System.Drawing.Size(517, 132);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recherche:";
@@ -103,7 +105,7 @@ namespace MagasinTelephone
             // btnRecherche
             // 
             this.btnRecherche.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRecherche.Location = new System.Drawing.Point(7, 53);
+            this.btnRecherche.Location = new System.Drawing.Point(8, 85);
             this.btnRecherche.Margin = new System.Windows.Forms.Padding(2);
             this.btnRecherche.Name = "btnRecherche";
             this.btnRecherche.Size = new System.Drawing.Size(506, 43);
@@ -114,7 +116,7 @@ namespace MagasinTelephone
             // 
             // txtRecherche
             // 
-            this.txtRecherche.Location = new System.Drawing.Point(7, 32);
+            this.txtRecherche.Location = new System.Drawing.Point(5, 61);
             this.txtRecherche.Margin = new System.Windows.Forms.Padding(2);
             this.txtRecherche.Name = "txtRecherche";
             this.txtRecherche.Size = new System.Drawing.Size(507, 20);
@@ -124,7 +126,7 @@ namespace MagasinTelephone
             // lblTypeDeRecherche
             // 
             this.lblTypeDeRecherche.AutoSize = true;
-            this.lblTypeDeRecherche.Location = new System.Drawing.Point(5, 17);
+            this.lblTypeDeRecherche.Location = new System.Drawing.Point(5, 46);
             this.lblTypeDeRecherche.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTypeDeRecherche.Name = "lblTypeDeRecherche";
             this.lblTypeDeRecherche.Size = new System.Drawing.Size(167, 13);
@@ -150,6 +152,7 @@ namespace MagasinTelephone
             this.telephonePrintPreviewDialog.Enabled = true;
             this.telephonePrintPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("telephonePrintPreviewDialog.Icon")));
             this.telephonePrintPreviewDialog.Name = "telephonePrintPreviewDialog";
+            this.telephonePrintPreviewDialog.UseAntiAlias = true;
             this.telephonePrintPreviewDialog.Visible = false;
             // 
             // telephonePrintDocument
@@ -168,6 +171,17 @@ namespace MagasinTelephone
             this.pbThumbnail.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbThumbnail.TabIndex = 1;
             this.pbThumbnail.TabStop = false;
+            // 
+            // lblRechercheCount
+            // 
+            this.lblRechercheCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblRechercheCount.Location = new System.Drawing.Point(412, 15);
+            this.lblRechercheCount.Name = "lblRechercheCount";
+            this.lblRechercheCount.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblRechercheCount.Size = new System.Drawing.Size(100, 23);
+            this.lblRechercheCount.TabIndex = 3;
+            this.lblRechercheCount.Text = "Occurrences: 0";
+            this.lblRechercheCount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // Telephones
             // 
@@ -210,6 +224,7 @@ namespace MagasinTelephone
         private System.Windows.Forms.Label lblTypeDeTelephone;
         private System.Windows.Forms.PrintPreviewDialog telephonePrintPreviewDialog;
         private System.Drawing.Printing.PrintDocument telephonePrintDocument;
+        private System.Windows.Forms.Label lblRechercheCount;
     }
 }
 
