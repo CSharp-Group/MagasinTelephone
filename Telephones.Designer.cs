@@ -35,7 +35,7 @@
             this.btnImprimer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRecherche = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtRecherche = new System.Windows.Forms.TextBox();
             this.lblTypeDeRecherche = new System.Windows.Forms.Label();
             this.lblTypeDeTelephone = new System.Windows.Forms.Label();
             this.telephonePrintPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
@@ -88,7 +88,7 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnRecherche);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtRecherche);
             this.groupBox1.Controls.Add(this.lblTypeDeRecherche);
             this.groupBox1.Location = new System.Drawing.Point(8, 402);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -109,14 +109,16 @@
             this.btnRecherche.TabIndex = 2;
             this.btnRecherche.Text = "Afficher le nombre de Telephone";
             this.btnRecherche.UseVisualStyleBackColor = true;
+            this.btnRecherche.Click += new System.EventHandler(this.Recherche);
             // 
-            // textBox1
+            // txtRecherche
             // 
-            this.textBox1.Location = new System.Drawing.Point(7, 32);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(507, 20);
-            this.textBox1.TabIndex = 1;
+            this.txtRecherche.Location = new System.Drawing.Point(7, 32);
+            this.txtRecherche.Margin = new System.Windows.Forms.Padding(2);
+            this.txtRecherche.Name = "txtRecherche";
+            this.txtRecherche.Size = new System.Drawing.Size(507, 20);
+            this.txtRecherche.TabIndex = 1;
+            this.txtRecherche.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRecherche_KeyDown);
             // 
             // lblTypeDeRecherche
             // 
@@ -202,7 +204,7 @@
         private System.Windows.Forms.Button btnImprimer;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnRecherche;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtRecherche;
         private System.Windows.Forms.Label lblTypeDeRecherche;
         private System.Windows.Forms.Label lblTypeDeTelephone;
         private System.Windows.Forms.PrintPreviewDialog telephonePrintPreviewDialog;

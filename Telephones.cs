@@ -94,6 +94,57 @@ namespace MagasinTelephone
             telephonePrintPreviewDialog.ShowDialog();
         }
 
-        
+        #region Recherche
+        private int _lastSearchIndex = 0;
+        private string _lastSearchString = string.Empty;
+
+        private void Recherche(object sender, EventArgs e)
+        {
+            string searchText = txtRecherche.Text;
+
+            if (searchText != _lastSearchString)
+            {
+                _lastSearchIndex = 0;
+                _lastSearchString = searchText;
+            }
+            else
+            {
+                // Move the index to the next character after the last found instance.
+                _lastSearchIndex += searchText.Length;
+            }
+
+            int index = rtbTelephones.Find(searchText, _lastSearchIndex, RichTextBoxFinds.None);
+
+            // If no match was found, search from the beginning.
+            if (index < 0)
+            {
+                index = rtbTelephones.Find(searchText, 0, RichTextBoxFinds.None);
+            }
+
+            // Determine whether the text was found in rtbTelephones.
+            if (index >= 0)
+            {
+                // Select the found text.
+                rtbTelephones.Select(index, txtRecherche.Text.Length);
+                rtbTelephones.Focus();
+
+                // Update the index.
+                _lastSearchIndex = index;
+            }
+            else
+            {
+                // Display a message box indicating that the text was not found.
+                MessageBox.Show("Text was not found.");
+                _lastSearchIndex = 0; // Reset the index.
+            }
+        }
+        private void txtRecherche_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                Recherche(sender, e);
+            }
+        }
+        #endregion
     }
 }
