@@ -111,6 +111,7 @@ namespace MagasinTelephone
             telephonePrintPreviewDialog.Load += (s, loadEventArgs) =>
             {
                 ((Form)telephonePrintPreviewDialog).WindowState = FormWindowState.Maximized;
+                telephonePrintPreviewDialog.PrintPreviewControl.Zoom = 2.0;
             };
             telephonePrintPreviewDialog.ShowDialog();
         }
