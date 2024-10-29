@@ -124,7 +124,7 @@ namespace MagasinTelephone
                 FontFamily[] fontFamilies;
                 InstalledFontCollection installedFontCollection = new InstalledFontCollection();
 
-                fontFamilies = installedFontCollection.Families;
+                fontFamilies = installedFontCollection.Families.Reverse().ToArray();
 
                 foreach (FontFamily fontFamily in fontFamilies)
                 {
