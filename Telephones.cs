@@ -19,7 +19,10 @@ namespace MagasinTelephone
 
         private void Telephones_Load(object sender, EventArgs e)
         {
-            richTextBox1.LoadFile("C:\\Users\\ejalbert26\\source\\repos\\Annee2\\PROG1236 - C#\\GitHub\\Projet 1\\Data\\Telephones.rtf");
+            string currentDirectory = Environment.CurrentDirectory;
+            string projectDirectory = System.IO.Directory.GetParent(currentDirectory).Parent.FullName;
+            string filePath = projectDirectory + "\\Data\\Telephones.rtf";
+            rtbTelephones.LoadFile(filePath);
         }
 
         private void telephonePrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -39,7 +42,7 @@ namespace MagasinTelephone
             Single hauteurPoliceEnteteSingle = enteteFont.GetHeight(e.Graphics);
             Single hauteurPoliceDetailSingle = detailsFont.GetHeight(e.Graphics);
 
-            Image image = pictureBox1.Image;
+            Image image = pbThumbnail.Image;
             string titreStr = "Marques de téléphones";
             string listeMarquesStr = "Marques: ";
             string listeNomStr = "Nom: ";
@@ -50,10 +53,20 @@ namespace MagasinTelephone
             float xFloat = e.MarginBounds.X;
             float yFloat = e.MarginBounds.Y;
 
+            float imgWidth, imgHeight, imgCenterX;
+
+            float imgRatio = (float)image.Width / (float)image.Height;
+            imgWidth = 500;
+            imgHeight = imgWidth / imgRatio;
+            imgCenterX = (e.PageBounds.Width / 2) - (imgWidth / 2);
+
+
             float logoX = e.MarginBounds.X + (e.MarginBounds.Width - image.Width * 2) / 2;
+            
+            
             yFloat += hauteurPoliceEnteteSingle + 10; 
-            e.Graphics.DrawImage(image, logoX, yFloat, image.Width * 2, image.Height * 2);
-            yFloat += image.Height * 2 + 10;
+            e.Graphics.DrawImage(image, imgCenterX, yFloat, imgWidth, imgHeight);
+            yFloat += imgHeight + 10;
 
             float titreCentreFloat = (e.PageBounds.Width / 2) - (largeurTitreSingle / 2);
 
@@ -68,7 +81,7 @@ namespace MagasinTelephone
 
             yFloat += 30;
 
-            foreach (string line in richTextBox1.Lines)
+            foreach (string line in rtbTelephones.Lines)
             {
                 e.Graphics.DrawString(line, listeFont, Brushes.Black, xFloat, yFloat);
                 yFloat += detailsFont.GetHeight(e.Graphics) + 5; 
