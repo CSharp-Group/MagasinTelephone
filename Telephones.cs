@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,8 @@ namespace MagasinTelephone
 
         private void Telephones_Load(object sender, EventArgs e)
         {
+            AfficherPolicesInstallées(sender, e);
+
             richTextBox1.LoadFile("C:\\Users\\ejalbert26\\source\\repos\\Annee2\\PROG1236 - C#\\GitHub\\Projet 1\\Data\\Telephones.rtf");
         }
 
@@ -81,6 +84,43 @@ namespace MagasinTelephone
             telephonePrintPreviewDialog.ShowDialog();
         }
 
-        
+
+        #region AfficherPolicesInstallées
+        private void AfficherPolicesInstallées(object sender, EventArgs e)
+        {
+            try
+            {
+                FontFamily[] fontFamilies;
+                InstalledFontCollection installedFontCollection = new InstalledFontCollection();
+
+                fontFamilies = installedFontCollection.Families;
+
+                foreach (FontFamily fontFamily in fontFamilies)
+                {
+                    cboPolice.Items.Add(fontFamily.Name);
+                }
+
+                cboPolice.SelectedIndex = cboPolice.Items.IndexOf(richTextBox1.Font.FontFamily.Name);
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur: {ex.Message}", "Erreur pendant l'affichage des polices installées");
+            }
+        }
+        #endregion
+
+        private void cboPolice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string selectedFont = cboPolice.SelectedItem.ToString();
+                richTextBox1.Font = new Font(selectedFont, 12);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de l'application de la police : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

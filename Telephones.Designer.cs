@@ -60,11 +60,12 @@
             // cboPolice
             // 
             this.cboPolice.Name = "cboPolice";
-            this.cboPolice.Size = new System.Drawing.Size(121, 38);
+            this.cboPolice.Size = new System.Drawing.Size(280, 38);
+            this.cboPolice.SelectedIndexChanged += new System.EventHandler(this.cboPolice_SelectedIndexChanged);
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::MagasinTelephone.Properties.Resources.download;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 36);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(770, 233);
@@ -76,6 +77,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(12, 298);
             this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(776, 237);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
