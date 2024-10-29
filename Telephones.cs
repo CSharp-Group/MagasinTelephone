@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace MagasinTelephone
             string projectDirectory = System.IO.Directory.GetParent(currentDirectory).Parent.FullName;
             string filePath = projectDirectory + "\\Data\\Telephones.rtf";
             rtbTelephones.LoadFile(filePath);
+            AfficherPolicesInstallées(sender, e)
         }
 
         private void telephonePrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -94,6 +96,43 @@ namespace MagasinTelephone
             telephonePrintPreviewDialog.ShowDialog();
         }
 
-        
+
+        #region AfficherPolicesInstallées
+        private void AfficherPolicesInstallées(object sender, EventArgs e)
+        {
+            try
+            {
+                FontFamily[] fontFamilies;
+                InstalledFontCollection installedFontCollection = new InstalledFontCollection();
+
+                fontFamilies = installedFontCollection.Families;
+
+                foreach (FontFamily fontFamily in fontFamilies)
+                {
+                    cboPolice.Items.Add(fontFamily.Name);
+                }
+
+                cboPolice.SelectedIndex = cboPolice.Items.IndexOf(richTextBox1.Font.FontFamily.Name);
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur: {ex.Message}", "Erreur pendant l'affichage des polices installées");
+            }
+        }
+        #endregion
+
+        private void cboPolice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string selectedFont = cboPolice.SelectedItem.ToString();
+                richTextBox1.Font = new Font(selectedFont, 12);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Erreur lors de l'application de la police : {ex.Message}", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

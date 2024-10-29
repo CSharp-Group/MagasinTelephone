@@ -1,4 +1,4 @@
-﻿namespace MagasinTelephone
+namespace MagasinTelephone
 {
     partial class Telephones
     {
@@ -60,7 +60,8 @@
             // cboPolice
             // 
             this.cboPolice.Name = "cboPolice";
-            this.cboPolice.Size = new System.Drawing.Size(82, 25);
+            this.cboPolice.Size = new System.Drawing.Size(280, 38);
+            this.cboPolice.SelectedIndexChanged += new System.EventHandler(this.cboPolice_SelectedIndexChanged);
             // 
             // rtbTelephones
             // 
