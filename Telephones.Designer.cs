@@ -28,16 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Telephones));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.cboPolice = new System.Windows.Forms.ToolStripComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.btnImprimer = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblTypeDeRecherche = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnRecherche = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lblTypeDeRecherche = new System.Windows.Forms.Label();
             this.lblTypeDeTelephone = new System.Windows.Forms.Label();
+            this.telephonePrintPreviewDialog = new System.Windows.Forms.PrintPreviewDialog();
+            this.telephonePrintDocument = new System.Drawing.Printing.PrintDocument();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -57,13 +60,15 @@
             // cboPolice
             // 
             this.cboPolice.Name = "cboPolice";
-            this.cboPolice.Size = new System.Drawing.Size(121, 33);
+            this.cboPolice.Size = new System.Drawing.Size(121, 38);
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::MagasinTelephone.Properties.Resources.download;
             this.pictureBox1.Location = new System.Drawing.Point(12, 36);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(776, 204);
+            this.pictureBox1.Size = new System.Drawing.Size(770, 233);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -83,6 +88,7 @@
             this.btnImprimer.TabIndex = 3;
             this.btnImprimer.Text = "Imprimer la liste de Telephone";
             this.btnImprimer.UseVisualStyleBackColor = true;
+            this.btnImprimer.Click += new System.EventHandler(this.btnImprimer_Click);
             // 
             // groupBox1
             // 
@@ -96,22 +102,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Recherche:";
             // 
-            // lblTypeDeRecherche
-            // 
-            this.lblTypeDeRecherche.AutoSize = true;
-            this.lblTypeDeRecherche.Location = new System.Drawing.Point(7, 26);
-            this.lblTypeDeRecherche.Name = "lblTypeDeRecherche";
-            this.lblTypeDeRecherche.Size = new System.Drawing.Size(243, 20);
-            this.lblTypeDeRecherche.TabIndex = 0;
-            this.lblTypeDeRecherche.Text = "Types de Telephone Rechercher:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(11, 49);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(759, 26);
-            this.textBox1.TabIndex = 1;
-            // 
             // btnRecherche
             // 
             this.btnRecherche.Location = new System.Drawing.Point(11, 81);
@@ -121,6 +111,22 @@
             this.btnRecherche.Text = "Afficher le nombre de Telephone";
             this.btnRecherche.UseVisualStyleBackColor = true;
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(11, 49);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(759, 26);
+            this.textBox1.TabIndex = 1;
+            // 
+            // lblTypeDeRecherche
+            // 
+            this.lblTypeDeRecherche.AutoSize = true;
+            this.lblTypeDeRecherche.Location = new System.Drawing.Point(7, 26);
+            this.lblTypeDeRecherche.Name = "lblTypeDeRecherche";
+            this.lblTypeDeRecherche.Size = new System.Drawing.Size(243, 20);
+            this.lblTypeDeRecherche.TabIndex = 0;
+            this.lblTypeDeRecherche.Text = "Types de Telephone Rechercher:";
+            // 
             // lblTypeDeTelephone
             // 
             this.lblTypeDeTelephone.AutoSize = true;
@@ -129,6 +135,21 @@
             this.lblTypeDeTelephone.Size = new System.Drawing.Size(156, 20);
             this.lblTypeDeTelephone.TabIndex = 5;
             this.lblTypeDeTelephone.Text = "Type de Telephones:";
+            // 
+            // telephonePrintPreviewDialog
+            // 
+            this.telephonePrintPreviewDialog.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.telephonePrintPreviewDialog.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.telephonePrintPreviewDialog.ClientSize = new System.Drawing.Size(400, 300);
+            this.telephonePrintPreviewDialog.Document = this.telephonePrintDocument;
+            this.telephonePrintPreviewDialog.Enabled = true;
+            this.telephonePrintPreviewDialog.Icon = ((System.Drawing.Icon)(resources.GetObject("telephonePrintPreviewDialog.Icon")));
+            this.telephonePrintPreviewDialog.Name = "telephonePrintPreviewDialog";
+            this.telephonePrintPreviewDialog.Visible = false;
+            // 
+            // telephonePrintDocument
+            // 
+            this.telephonePrintDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.telephonePrintDocument_PrintPage);
             // 
             // Telephones
             // 
@@ -144,6 +165,7 @@
             this.Name = "Telephones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Telephones";
+            this.Load += new System.EventHandler(this.Telephones_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -166,6 +188,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label lblTypeDeRecherche;
         private System.Windows.Forms.Label lblTypeDeTelephone;
+        private System.Windows.Forms.PrintPreviewDialog telephonePrintPreviewDialog;
+        private System.Drawing.Printing.PrintDocument telephonePrintDocument;
     }
 }
 
