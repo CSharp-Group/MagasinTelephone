@@ -184,7 +184,7 @@ namespace MagasinTelephone
             if (index >= 0)
             {
                 int occurrences = CountOccurrences(rtbTelephones, txtRecherche.Text);
-                //MessageBox.Show($"Le mot \"{txtRecherche.Text}\" a été trouvé {occurrences} fois."); // Si on veut afficher le nombre d'occurrences avec message box
+                MessageBox.Show($"Le mot \"{txtRecherche.Text}\" a été trouvé {occurrences} fois."); // Si on veut afficher le nombre d'occurrences avec message box
                 lblRechercheCount.Text = $"Occurrences: {occurrences}"; // Si on veut afficher le nombre d'occurrences dans le label
                 // Select the found text.
                 rtbTelephones.Select(index, txtRecherche.Text.Length);
