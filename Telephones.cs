@@ -24,7 +24,7 @@ namespace MagasinTelephone
             string projectDirectory = System.IO.Directory.GetParent(currentDirectory).Parent.FullName;
             string filePath = projectDirectory + "\\Data\\Telephones.rtf";
             rtbTelephones.LoadFile(filePath);
-            AfficherPolicesInstallées(sender, e)
+            AfficherPolicesInstallées(sender, e);
         }
 
         private void telephonePrintDocument_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -112,7 +112,7 @@ namespace MagasinTelephone
                     cboPolice.Items.Add(fontFamily.Name);
                 }
 
-                cboPolice.SelectedIndex = cboPolice.Items.IndexOf(richTextBox1.Font.FontFamily.Name);
+                cboPolice.SelectedIndex = cboPolice.Items.IndexOf(rtbTelephones.Font.FontFamily.Name);
                 
             }
             catch (Exception ex)
@@ -127,7 +127,7 @@ namespace MagasinTelephone
             try
             {
                 string selectedFont = cboPolice.SelectedItem.ToString();
-                richTextBox1.Font = new Font(selectedFont, 12);
+                rtbTelephones.Font = new Font(selectedFont, 12);
             }
             catch (Exception ex)
             {
